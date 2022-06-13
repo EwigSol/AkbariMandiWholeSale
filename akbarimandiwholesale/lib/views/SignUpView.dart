@@ -1,12 +1,13 @@
-import 'package:akbarimandiwholesale/views/PhoneVerification.dart';
-import 'package:akbarimandiwholesale/views/SignUpView.dart';
+import 'package:akbarimandiwholesale/views/LoginView.dart';
 import 'package:akbarimandiwholesale/views/TextField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 import 'SocialIconWidget.dart';
 
-class Login extends StatelessWidget {
-  Login({Key? key}) : super(key: key);
+class SignUp extends StatelessWidget {
+  SignUp({Key? key}) : super(key: key);
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -84,24 +85,6 @@ class Login extends StatelessWidget {
                           height: 20,
                         ),
                         Container(
-                          padding: const EdgeInsets.only(left: 15),
-                          width: double.infinity,
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                            onTap: () {
-                              // Get.to(() => ForgotPassword());
-                            },
-                            child: const Text(
-                              "پاس ورڈ یاد نہیں ؟",
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           width: double.infinity,
                           child: ClipRRect(
@@ -110,7 +93,6 @@ class Login extends StatelessWidget {
                               height: 60.0,
                               color: Colors.green,
                               onPressed: () async {
-                                Get.to(() => PhoneVerification());
                                 // isLoading.value = true;
                                 // if (GetUtils.isEmail(emailController.text)) {
                                 //   await authController.logIn(
@@ -125,7 +107,7 @@ class Login extends StatelessWidget {
                               // isLoading.value = false;
                               // },
                               child: const Text(
-                                'لاگ ان کریں',
+                                'نیا اکاؤنٹ بنائیں',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -141,10 +123,10 @@ class Login extends StatelessWidget {
                           children: <Widget>[
                             GestureDetector(
                               onTap: () {
-                                Get.to(() => SignUp());
+                                Get.to(() => Login());
                               },
                               child: const Text(
-                                "چلیں نیا اکاؤنٹ بناتے ہیں.",
+                                "لاگ ان کریں.",
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
@@ -156,7 +138,7 @@ class Login extends StatelessWidget {
                               width: 5,
                             ),
                             const Text(
-                              "اکاؤنٹ نہیں ؟",
+                              'اکاؤنٹ پہلے سے ہے ؟',
                               style:
                                   TextStyle(color: Colors.black, fontSize: 20),
                             ),
@@ -172,7 +154,7 @@ class Login extends StatelessWidget {
                               endIndent: 10,
                             )),
                             Text(
-                              'یا پھر سوشل میڈیا سے لاگ ان کریں ؟',
+                              'یا پھر سوشل میڈیا سے اکاؤنٹ بنائیں ؟',
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.bold),
                             ),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1027032251330",
+    "project_id": "akbarimandiwholesale",
+    "storage_bucket": "akbarimandiwholesale.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027032251330:android:0768a0e210c9e099aff45b",
+        "android_client_info": {
+          "package_name": "com.example.akbarimandiwholesale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027032251330-2ckf0hi64oaf5ob55vpirioo2dhgb06s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYagct14deM1dmoyC-YVq5zjYpJI0RQtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027032251330-2ckf0hi64oaf5ob55vpirioo2dhgb06s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
