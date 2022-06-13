@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -10,20 +11,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/app_logo.png',
+                height: 100,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              const Text(
+                'اکبری مندی ہول سیل',
+                style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 15,
+                    fontFamily: 'Noto Nastaliq Urdu',
+                    fontWeight: FontWeight.normal),
+              ),
+              TextField(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
