@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ffi';
-import 'package:akbarimandiwholesale/views/Home.dart';
+import 'package:akbarimandiwholesale/views/LoginView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,12 +12,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final height = Get.height;
-  final width = Get.width;
+  double height = Get.height;
+  double width = Get.width;
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () => Get.to(() => MyHomePage()));
+    Timer(const Duration(seconds: 2), () => Get.to(() => LoginView()));
   }
 
   @override
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               'assets/images/app_logo.png',
               height: 100,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Text(
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontFamily: 'Noto Nastaliq Urdu',
                   fontWeight: FontWeight.normal),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Text(
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 25,
-                  // fontFamily: 'Noto Nastaliq Urdu',s
+                  fontFamily: 'popins',
                   fontWeight: FontWeight.normal),
             ),
           ],
