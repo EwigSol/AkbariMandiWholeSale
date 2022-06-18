@@ -35,7 +35,7 @@ class Login extends StatelessWidget {
                     'اکبری مندی ہول سیل',
                     style: TextStyle(
                         color: Colors.green,
-                        fontSize: 25,
+                        fontSize: 52,
                         // fontFamily: 'Noto Nastaliq Urdu',
                         fontWeight: FontWeight.normal),
                   ),
@@ -128,14 +128,13 @@ class Login extends StatelessWidget {
                                 'لاگ ان کریں',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                                    fontSize: 32,
                                     letterSpacing: 2),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 12),
+                        SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -158,11 +157,11 @@ class Login extends StatelessWidget {
                             const Text(
                               "اکاؤنٹ نہیں ؟",
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
+                                  TextStyle(color: Colors.black, fontSize: 28),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 30),
                         Row(
                           children: const [
                             Expanded(
@@ -174,7 +173,7 @@ class Login extends StatelessWidget {
                             Text(
                               'یا پھر سوشل میڈیا سے لاگ ان کریں ؟',
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
+                                  fontSize: 24, fontWeight: FontWeight.bold),
                             ),
                             Expanded(
                               child: Divider(

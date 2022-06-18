@@ -36,9 +36,11 @@ class SignUp extends StatelessWidget {
                     'اکبری مندی ہول سیل',
                     style: TextStyle(
                         color: Colors.green,
-                        fontSize: 25,
-                        // fontFamily: 'Noto Nastaliq Urdu',
+                        fontSize: 52.0,
                         fontWeight: FontWeight.normal),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -110,14 +112,13 @@ class SignUp extends StatelessWidget {
                                 'نیا اکاؤنٹ بنائیں',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                                    fontSize: 32,
                                     letterSpacing: 2),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 12),
+                        SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -130,21 +131,21 @@ class SignUp extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 24,
                                 ),
                               ),
                             ),
                             const SizedBox(
-                              width: 5,
+                              width: 10,
                             ),
                             const Text(
                               'اکاؤنٹ پہلے سے ہے ؟',
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
+                                  TextStyle(color: Colors.black, fontSize: 24),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 30),
                         Row(
                           children: const [
                             Expanded(
@@ -156,7 +157,7 @@ class SignUp extends StatelessWidget {
                             Text(
                               'یا پھر سوشل میڈیا سے اکاؤنٹ بنائیں ؟',
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
+                                  fontSize: 24, fontWeight: FontWeight.bold),
                             ),
                             Expanded(
                               child: Divider(

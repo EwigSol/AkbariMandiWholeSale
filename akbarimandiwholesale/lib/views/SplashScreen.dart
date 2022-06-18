@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ffi';
 import 'package:akbarimandiwholesale/views/LoginView.dart';
+import 'package:akbarimandiwholesale/views/SignUpView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () => Get.to(() => Login()));
+    // Timer(const Duration(seconds: 2), () => Get.to(() => SignUp()));
   }
 
   @override

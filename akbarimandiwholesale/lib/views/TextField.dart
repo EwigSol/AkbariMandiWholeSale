@@ -33,6 +33,11 @@ class TextFieldWidget extends StatelessWidget {
         obscureText: obsecure,
         controller: controller,
         cursorColor: Colors.black,
+        style: TextStyle(
+          color: Colors.green,
+          fontSize: 24,
+        ),
+
         decoration: InputDecoration(
             fillColor: Colors.black,
             border: InputBorder.none,
@@ -42,6 +47,10 @@ class TextFieldWidget extends StatelessWidget {
               color: Colors.green,
             ),
             hintText: lable,
+            hintStyle: TextStyle(
+              color: Colors.green,
+              fontSize: 24,
+            ),
             suffixIcon: trailing),
       ),
     );
