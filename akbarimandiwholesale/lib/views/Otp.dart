@@ -23,14 +23,14 @@ class OtpScreen extends StatelessWidget {
                 SizedBox(
                   height: 16,
                 ),
-                FlatButton(
-                  onPressed: () {
-                    loginController.otpVerify(otp.text);
-                  },
-                  child: Text("VERIFY"),
-                  color: Colors.blue,
-                  textColor: Colors.white,
-                ),
+                // FlatButton(
+                //   onPressed: () {
+                //     loginController.otpVerify(otp.text);
+                //   },
+                //   child: Text("VERIFY"),
+                //   color: Colors.blue,
+                //   textColor: Colors.white,
+                // ),
                 Spacer(),
               ],
             )),
