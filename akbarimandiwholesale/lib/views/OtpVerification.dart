@@ -1,4 +1,6 @@
-import 'package:akbarimandiwholesale/Controllers/Auth/LoginController.dart';
+// ignore_for_file: file_names, use_key_in_widget_constructors
+
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,15 +8,15 @@ import 'Otp.dart';
 
 class OtpVerification extends StatelessWidget {
   final phone = TextEditingController();
-  final LoginController loginController = Get.find();
+  final AuthController loginController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('او ٹی پی نمبر کی تصدیق کریں'),
+        title: const Text('او ٹی پی نمبر کی تصدیق کریں'),
       ),
       body: loginController.isLoading(false)
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
                 Column(
@@ -22,26 +24,24 @@ class OtpVerification extends StatelessWidget {
                     Form(
                       child: Column(
                         children: [
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10.0,
-                                horizontal: 10.0,
-                              ),
-                              child: TextFormField(
-                                controller: phone,
-                                keyboardType: TextInputType.phone,
-                                decoration: InputDecoration(
-                                  labelText: 'او ٹی پی نمبر',
-                                  labelStyle: TextStyle(
-                                    fontSize: 18,
-                                  ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                              horizontal: 10.0,
+                            ),
+                            child: TextFormField(
+                              controller: phone,
+                              keyboardType: TextInputType.phone,
+                              decoration: const InputDecoration(
+                                labelText: 'او ٹی پی نمبر',
+                                labelStyle: TextStyle(
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 40, bottom: 5),
+                            margin: const EdgeInsets.only(top: 40, bottom: 5),
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),

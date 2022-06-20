@@ -1,5 +1,6 @@
+// ignore_for_file: file_names, prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class TextFieldWidget extends StatelessWidget {
   TextFieldWidget({
@@ -22,7 +23,7 @@ class TextFieldWidget extends StatelessWidget {
     return Container(
       height: 60,
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.green[100],
@@ -33,7 +34,7 @@ class TextFieldWidget extends StatelessWidget {
         obscureText: obsecure,
         controller: controller,
         cursorColor: Colors.black,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.green,
           fontSize: 24,
         ),
@@ -47,7 +48,7 @@ class TextFieldWidget extends StatelessWidget {
               color: Colors.green,
             ),
             hintText: lable,
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Colors.green,
               fontSize: 24,
             ),

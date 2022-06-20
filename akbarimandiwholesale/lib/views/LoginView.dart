@@ -1,3 +1,4 @@
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
 import 'package:akbarimandiwholesale/views/PhoneVerification.dart';
 import 'package:akbarimandiwholesale/views/SignUpView.dart';
 import 'package:akbarimandiwholesale/views/TextField.dart';
@@ -10,6 +11,7 @@ class Login extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final AuthController authController = Get.put(AuthController());
   final isObsecure = true.obs;
 
   @override
@@ -48,7 +50,9 @@ class Login extends StatelessWidget {
                           controller: emailController,
                           leadingIcon: Icons.mail,
                           lable: 'ای میل انٹر کریں',
-                          trailing: isObsecure.value ? SizedBox() : SizedBox(),
+                          trailing: isObsecure.value
+                              ? const SizedBox()
+                              : const SizedBox(),
                         ),
                         const SizedBox(
                           height: 15,
@@ -110,7 +114,9 @@ class Login extends StatelessWidget {
                               height: 60.0,
                               color: Colors.green,
                               onPressed: () async {
-                                Get.to(() => PhoneVerification());
+                                authController.logIn(emailController.text,
+                                    passwordController.text);
+                                Get.offAll(() => PhoneVerification());
                                 // isLoading.value = true;
                                 // if (GetUtils.isEmail(emailController.text)) {
                                 //   await authController.logIn(
@@ -134,7 +140,7 @@ class Login extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

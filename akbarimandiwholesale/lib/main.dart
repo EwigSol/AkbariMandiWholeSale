@@ -1,4 +1,4 @@
-import 'package:akbarimandiwholesale/Controllers/Auth/LoginController.dart';
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
 import 'package:akbarimandiwholesale/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // Get.put(LoginController());
-  Get.put(LoginController());
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 

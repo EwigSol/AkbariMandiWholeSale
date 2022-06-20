@@ -1,7 +1,7 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
-import 'dart:ffi';
 import 'package:akbarimandiwholesale/views/LoginView.dart';
-import 'package:akbarimandiwholesale/views/SignUpView.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,22 +1,24 @@
-import 'package:akbarimandiwholesale/Controllers/Auth/LoginController.dart';
+// ignore_for_file: file_names
+
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
 import 'package:akbarimandiwholesale/views/OtpVerification.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'Otp.dart';
-
 class PhoneVerification extends StatelessWidget {
   final phone = TextEditingController();
-  final LoginController loginController = Get.find();
+  final AuthController loginController = Get.find<AuthController>();
+
+  PhoneVerification({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('موبائل نمبر کی تصدیق کریں'),
+        title: const Text('موبائل نمبر کی تصدیق کریں'),
       ),
       body: loginController.isLoading(false)
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView(
               children: [
                 Column(
@@ -24,46 +26,44 @@ class PhoneVerification extends StatelessWidget {
                     Form(
                       child: Column(
                         children: [
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10.0,
-                                horizontal: 10.0,
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 120.0,
-                                    child: CountryCodePicker(
-                                      initialSelection: 'PK',
-                                      // favorite: ['+92'],
-                                      countryFilter: const ['PK'],
-                                      hideSearch: true,
-                                      showDropDownButton: false,
-                                      showFlagDialog: false,
-                                      showFlagMain: true,
-                                    ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                              horizontal: 10.0,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 120.0,
+                                  child: CountryCodePicker(
+                                    initialSelection: 'PK',
+                                    // favorite: ['+92'],
+                                    countryFilter: const ['PK'],
+                                    hideSearch: true,
+                                    showDropDownButton: false,
+                                    showFlagDialog: false,
+                                    showFlagMain: true,
                                   ),
-                                  Container(
-                                    width: 250,
-                                    child: TextFormField(
-                                      controller: phone,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: const InputDecoration(
-                                        labelText: 'موبائل نمبر',
-                                        labelStyle: TextStyle(
-                                          fontSize: 18,
-                                        ),
+                                ),
+                                SizedBox(
+                                  width: 250,
+                                  child: TextFormField(
+                                    controller: phone,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: const InputDecoration(
+                                      labelText: 'موبائل نمبر',
+                                      labelStyle: TextStyle(
+                                        fontSize: 18,
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 40, bottom: 5),
+                            margin: const EdgeInsets.only(top: 40, bottom: 5),
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -71,7 +71,7 @@ class PhoneVerification extends StatelessWidget {
                                 onPressed: () async {
                                   loginController.verifyPhone(phone.text);
                                   // Get.to(OtpScreen());
-                                  Get.to(OtpVerification());
+                                  // Get.to(OtpVerification());
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(

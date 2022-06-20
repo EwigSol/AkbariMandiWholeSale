@@ -1,14 +1,16 @@
+// ignore_for_file: file_names
+
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
 import 'package:akbarimandiwholesale/views/LoginView.dart';
 import 'package:akbarimandiwholesale/views/TextField.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'SocialIconWidget.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
-
+  final AuthController authController = Get.put(AuthController());
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final isObsecure = true.obs;
@@ -39,7 +41,7 @@ class SignUp extends StatelessWidget {
                         fontSize: 52.0,
                         fontWeight: FontWeight.normal),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(
@@ -51,7 +53,9 @@ class SignUp extends StatelessWidget {
                           controller: emailController,
                           leadingIcon: Icons.mail,
                           lable: 'ای میل انٹر کریں',
-                          trailing: isObsecure.value ? SizedBox() : SizedBox(),
+                          trailing: isObsecure.value
+                              ? const SizedBox()
+                              : const SizedBox(),
                         ),
                         const SizedBox(
                           height: 15,
@@ -95,6 +99,9 @@ class SignUp extends StatelessWidget {
                               height: 60.0,
                               color: Colors.green,
                               onPressed: () async {
+                                await authController.createUserViaEmail(
+                                    emailController.text,
+                                    passwordController.text);
                                 // isLoading.value = true;
                                 // if (GetUtils.isEmail(emailController.text)) {
                                 //   await authController.logIn(
@@ -118,7 +125,7 @@ class SignUp extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
