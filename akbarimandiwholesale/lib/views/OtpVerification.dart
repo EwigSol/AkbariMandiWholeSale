@@ -1,19 +1,17 @@
 import 'package:akbarimandiwholesale/Controllers/Auth/LoginController.dart';
-import 'package:akbarimandiwholesale/views/OtpVerification.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'Otp.dart';
 
-class PhoneVerification extends StatelessWidget {
+class OtpVerification extends StatelessWidget {
   final phone = TextEditingController();
   final LoginController loginController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('موبائل نمبر کی تصدیق کریں'),
+        title: Text('او ٹی پی نمبر کی تصدیق کریں'),
       ),
       body: loginController.isLoading(false)
           ? Center(child: CircularProgressIndicator())
@@ -30,35 +28,15 @@ class PhoneVerification extends StatelessWidget {
                                 vertical: 10.0,
                                 horizontal: 10.0,
                               ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 120.0,
-                                    child: CountryCodePicker(
-                                      initialSelection: 'PK',
-                                      // favorite: ['+92'],
-                                      countryFilter: const ['PK'],
-                                      hideSearch: true,
-                                      showDropDownButton: false,
-                                      showFlagDialog: false,
-                                      showFlagMain: true,
-                                    ),
+                              child: TextFormField(
+                                controller: phone,
+                                keyboardType: TextInputType.phone,
+                                decoration: InputDecoration(
+                                  labelText: 'او ٹی پی نمبر',
+                                  labelStyle: TextStyle(
+                                    fontSize: 18,
                                   ),
-                                  Container(
-                                    width: 250,
-                                    child: TextFormField(
-                                      controller: phone,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: const InputDecoration(
-                                        labelText: 'موبائل نمبر',
-                                        labelStyle: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -70,8 +48,7 @@ class PhoneVerification extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () async {
                                   loginController.verifyPhone(phone.text);
-                                  // Get.to(OtpScreen());
-                                  Get.to(OtpVerification());
+                                  Get.to(OtpScreen());
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -83,13 +60,14 @@ class PhoneVerification extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: const <Widget>[
                                         Expanded(
-                                            child: Text(
-                                          "تصدیق کریں",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 18,
+                                          child: Text(
+                                            "تصدیق کریں",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
                                           ),
-                                        )),
+                                        ),
                                       ],
                                     )),
                               ),
