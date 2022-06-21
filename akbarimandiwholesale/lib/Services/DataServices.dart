@@ -19,15 +19,27 @@ class Database {
         "id": userModel.id,
         "name": userModel.name,
         "email": userModel.email,
-        "description": userModel.description,
-        'imageUrl': userModel.imageUrl,
-        'direct': userModel.direct,
-        'tag': userModel.tag,
+        "passKey": userModel.pass,
       });
       return true;
     } catch (e) {
       print(e.toString());
       return false;
     }
+  }
+
+  Stream<List<UserModel>> userStreamm(String uid) {
+    return firestore
+        .collection('users')
+        .doc(uid)
+        .collection('userDetials')
+        .snapshots()
+        .map((QuerySnapshot querySnapshot) {
+      List<UserModel> retVal = [];
+      querySnapshot.docs.forEach((element) {
+        retVal.add(UserModel.fromFirestore(element));
+      });
+      return retVal;
+    });
   }
 }

@@ -1,5 +1,9 @@
 // ignore_for_file: file_names, no_leading_underscores_for_local_identifiers, unused_catch_clause, unused_local_variable
 
+import 'package:akbarimandiwholesale/Controllers/UserController.dart';
+import 'package:akbarimandiwholesale/Models/UserModel.dart';
+import 'package:akbarimandiwholesale/Services/DataServices.dart';
+import 'package:akbarimandiwholesale/utils/GlobalVariables.dart';
 import 'package:akbarimandiwholesale/views/Home.dart';
 import 'package:akbarimandiwholesale/views/OtpVerification.dart';
 import 'package:akbarimandiwholesale/views/PhoneVerification.dart';
@@ -22,17 +26,11 @@ class AuthController extends GetxController {
         verificationCompleted: (PhoneAuthCredential authCredential) async {
           Get.snackbar("Code has Been Sent", "Please Enter the OTP");
           await auth.signInWithCredential(authCredential);
-          // if (auth.currentUser != null) {
-          //   isLoading.value = false;
-          //   authStatus.value = "login successfully";
-          //   Get.to(OtpVerification());
-          // }
         },
         verificationFailed: (authException) {
           if (authException.code == 'invalid-phone-number') {
-            print(authException.code);
-            // Get.snackbar("sms code info", "otp code hasn't been sent!!",
-            //     snackPosition: SnackPosition.BOTTOM);
+            Get.snackbar("sms code info", "otp code hasn't been sent!!",
+                snackPosition: SnackPosition.BOTTOM);
           }
         },
         codeSent: (String verificationId, int? resendToken) async {
@@ -45,7 +43,6 @@ class AuthController extends GetxController {
         });
   }
 
-  /////////
   otpVerify(String otp) async {
     isLoading.value = true;
     try {
@@ -68,6 +65,12 @@ class AuthController extends GetxController {
     try {
       UserCredential _auth = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      UserModel _userModel = UserModel(
+        id: _auth.user!.uid,
+        email: email,
+        pass: password,
+      );
+      await Database().createUser(_userModel);
       Get.to(() => PhoneVerification());
       Get.snackbar('Welcome', 'Account Created Successfuly',
           snackPosition: SnackPosition.BOTTOM);
@@ -82,9 +85,9 @@ class AuthController extends GetxController {
     try {
       UserCredential _authResult = await auth.signInWithEmailAndPassword(
           email: email, password: password);
-      // isSigned.value = true;
-      // userID.value = _authResult.user!.uid;
-      // Get.put(UserController()).onInit();
+      isSigned.value = true;
+      userID.value = _authResult.user!.uid;
+      Get.put(UserController()).onInit();
 
       Get.offAll(
         () => PhoneVerification(),

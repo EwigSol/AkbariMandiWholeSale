@@ -6,28 +6,19 @@ class UserModel {
   String? id;
   String? name;
   String? email;
-  String? description;
-  String? imageUrl;
-  bool? direct;
-  bool? tag;
+  String? pass;
 
   UserModel({
     this.id,
     this.name,
     this.email,
-    this.description,
-    this.imageUrl,
-    this.direct,
-    this.tag,
+    this.pass,
   });
 
   UserModel.fromFirestore(DocumentSnapshot doc) {
     id = doc['id'];
     name = doc['name'];
     email = doc['email'];
-    description = doc['description'];
-    imageUrl = doc['imageUrl'];
-    direct = doc['direct'];
-    tag = doc['tag'];
+    pass = doc['passKey'];
   }
 }
