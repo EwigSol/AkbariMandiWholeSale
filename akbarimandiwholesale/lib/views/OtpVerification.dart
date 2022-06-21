@@ -47,8 +47,8 @@ class OtpVerification extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  loginController.verifyPhone(phone.text);
-                                  Get.to(OtpScreen());
+                                  await loginController.otpVerify(phone.text);
+                                  // Get.to(OtpScreen());
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(

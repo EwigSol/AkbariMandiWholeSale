@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
+import 'package:akbarimandiwholesale/views/Otp.dart';
 import 'package:akbarimandiwholesale/views/OtpVerification.dart';
+// import 'package:akbarimandiwholesale/views/OtpVerification.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +12,9 @@ class PhoneVerification extends StatelessWidget {
   final phone = TextEditingController();
   final AuthController loginController = Get.find<AuthController>();
 
-  PhoneVerification({super.key});
+  String _countryDialCode = '+92';
+
+  // PhoneVerification();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +41,18 @@ class PhoneVerification extends StatelessWidget {
                                 SizedBox(
                                   width: 120.0,
                                   child: CountryCodePicker(
-                                    initialSelection: 'PK',
-                                    // favorite: ['+92'],
-                                    countryFilter: const ['PK'],
+                                    onChanged: (CountryCode coountryCode) {
+                                      _countryDialCode = coountryCode.dialCode!;
+                                    },
+                                    initialSelection: _countryDialCode,
+                                    favorite: [_countryDialCode],
                                     hideSearch: true,
+                                    padding: EdgeInsets.zero,
                                     showDropDownButton: false,
                                     showFlagDialog: false,
                                     showFlagMain: true,
+                                    textStyle:
+                                        const TextStyle(color: Colors.black),
                                   ),
                                 ),
                                 SizedBox(
@@ -69,9 +78,9 @@ class PhoneVerification extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  loginController.verifyPhone(phone.text);
-                                  // Get.to(OtpScreen());
-                                  // Get.to(OtpVerification());
+                                  var _phone = _countryDialCode + phone.text;
+                                  await loginController.verifyPhone(_phone);
+                                  Get.to(OtpVerification());
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(

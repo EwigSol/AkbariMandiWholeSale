@@ -17,22 +17,27 @@ class AuthController extends GetxController {
   verifyPhone(String phone) async {
     isLoading.value = true;
     await auth.verifyPhoneNumber(
-        // timeout: const Duration(seconds: 50),
+        timeout: const Duration(seconds: 50),
         phoneNumber: phone,
-        verificationCompleted: (AuthCredential authCredential) {
-          if (auth.currentUser != null) {
-            isLoading.value = false;
-            authStatus.value = "login successfully";
-            Get.to(OtpVerification());
-          }
+        verificationCompleted: (PhoneAuthCredential authCredential) async {
+          Get.snackbar("Code has Been Sent", "Please Enter the OTP");
+          await auth.signInWithCredential(authCredential);
+          // if (auth.currentUser != null) {
+          //   isLoading.value = false;
+          //   authStatus.value = "login successfully";
+          //   Get.to(OtpVerification());
+          // }
         },
         verificationFailed: (authException) {
-          Get.snackbar("sms code info", "otp code hasn't been sent!!",
-              snackPosition: SnackPosition.BOTTOM);
+          if (authException.code == 'invalid-phone-number') {
+            print(authException.code);
+            // Get.snackbar("sms code info", "otp code hasn't been sent!!",
+            //     snackPosition: SnackPosition.BOTTOM);
+          }
         },
-        codeSent: (String id, [int? forceResent]) {
+        codeSent: (String verificationId, int? resendToken) async {
           isLoading.value = false;
-          verId = id;
+          verId = verificationId;
           authStatus.value = "login successfully";
         },
         codeAutoRetrievalTimeout: (String id) {
@@ -48,7 +53,7 @@ class AuthController extends GetxController {
           PhoneAuthProvider.credential(verificationId: verId, smsCode: otp));
       if (userCredential.user != null) {
         isLoading.value = false;
-        Get.to(const Home());
+        Get.to(Home());
       }
     } on Exception catch (e) {
       Get.snackbar("otp info", "otp code is not correct !!",
