@@ -1,11 +1,28 @@
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
+import 'package:akbarimandiwholesale/Controllers/UserController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WaitingMessageScreen extends StatelessWidget {
-  const WaitingMessageScreen({Key? key}) : super(key: key);
+  WaitingMessageScreen({Key? key}) : super(key: key);
+  final authController = Get.put(AuthController());
+  final userController = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+            child: Text('${userController.userGetter!.name!} خوش آمدید')),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await authController.signOut();
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ],
+      ),
       body: SizedBox(
         child: Center(
           child: Column(

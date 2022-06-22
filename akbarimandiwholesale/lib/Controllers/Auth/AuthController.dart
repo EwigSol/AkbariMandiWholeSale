@@ -141,7 +141,7 @@ class AuthController extends GetxController {
       Get.put(UserController()).onInit();
 
       Get.offAll(
-        () => PhoneVerification(),
+        () => Home(),
       );
       Get.snackbar(
         "SignedIn",

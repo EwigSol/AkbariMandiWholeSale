@@ -56,7 +56,6 @@ class OtpVerification extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () async {
                                   await loginController.otpVerify(otp.text);
-                                  // Get.to(OtpScreen());
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(

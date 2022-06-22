@@ -8,8 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Database {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  //! Regarding Users
-
   Future<bool> createUser(UserModel userModel) async {
     try {
       await firestore
@@ -19,10 +17,19 @@ class Database {
           .doc('userDetials')
           .set({
         "id": userModel.id,
-        "name": userModel.name,
+        // "name": userModel.name,
         "email": userModel.email,
         "passKey": userModel.pass,
-        "phone": userModel.phone,
+        // "phone": userModel.phone,
+        // "businessName": userModel.businessName,
+        // "businessPhone": userModel.businessPhone,
+        // "reffererName": userModel.reffererName,
+        // "reffererPhone": userModel.businessPhone,
+        // "frontImageUrl": userModel.frontImageUrl,
+        // "insideImageUrl": userModel.insideImageUrl,
+        // "insideImageUrlTwo": userModel.insideImageUrlTwo,
+        // "longitude": userModel.longitude,
+        // "latitude": userModel.latitude,
       });
       return true;
     } catch (e) {
@@ -55,38 +62,55 @@ class Database {
         .update({"phone": phone});
   }
 
-  Future<bool> addBusinessInfo(BusinessModel businessModel) async {
-    try {
-      await firestore.collection("users").doc(businessModel.id).set({
-        "id": businessModel.id,
-        "name": businessModel.name,
-        "businessName": businessModel.businessName,
-        "businessPhone": businessModel.businessPhone,
-        "reffererName": businessModel.reffererName,
-        "reffererPhone": businessModel.businessPhone,
-        "frontImageUrl": businessModel.frontImageUrl,
-        "insideImageUrl": businessModel.insideImageUrl,
-        "insideImageUrl": businessModel.insideImageUrlTwo,
-      });
-      return true;
-    } catch (e) {
-      print(e.toString());
-      return false;
-    }
+  Future<void> updateFrontImagePic(imageUrl) async {
+    await firestore
+        .collection("users")
+        .doc(userID.value)
+        .collection('userDetials')
+        .doc('userDetials')
+        .update({"frontImageUrl": imageUrl});
   }
 
-  Stream<List<BusinessModel>> businessStreamm(String uid) {
-    return firestore
-        .collection('users')
-        .doc(uid)
-        .collection('businessInfo')
-        .snapshots()
-        .map((QuerySnapshot querySnapshot) {
-      List<BusinessModel> retVal = [];
-      querySnapshot.docs.forEach((element) {
-        retVal.add(BusinessModel.fromFirestore(element));
-      });
-      return retVal;
+  Future<void> updateInsideImagePic(imageUrl) async {
+    await firestore
+        .collection("users")
+        .doc(userID.value)
+        .collection('userDetials')
+        .doc('userDetials')
+        .update({"insideImageUrl": imageUrl});
+  }
+
+  Future<void> updateInsideImageTwoPic(imageUrl) async {
+    await firestore
+        .collection("users")
+        .doc(userID.value)
+        .collection('userDetials')
+        .doc('userDetials')
+        .update({"insideImageUrlTwo": imageUrl});
+  }
+
+  Future<void> updateBusinessInformation(
+      bsuinessName, fullName, businessPhone, refererName, refererPhone) async {
+    await firestore
+        .collection("users")
+        .doc(userID.value)
+        .collection('userDetials')
+        .doc('userDetials')
+        .update({
+      "name": fullName,
+      "businessName": bsuinessName,
+      "businessPhone": businessPhone,
+      "reffererName": refererName,
+      "reffererPhone": refererName,
     });
+  }
+
+  Future<void> updateLocation(latitude, longitude) async {
+    await firestore
+        .collection("users")
+        .doc(userID.value)
+        .collection('userDetials')
+        .doc('userDetials')
+        .update({"latitude": latitude, "longitude": longitude});
   }
 }

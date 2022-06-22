@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers, prefer_const_constructors
 
+import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
+import 'package:akbarimandiwholesale/Services/DataServices.dart';
 import 'package:akbarimandiwholesale/views/BusinessDetailFomr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,12 +9,24 @@ import 'package:location/location.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
+  final authController = Get.put(AuthController());
   double height = Get.height;
   var location = Location();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text('دکان کی لوکیشن سلیکٹ کریں')),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await authController.signOut();
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +49,7 @@ class Home extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       await locationService();
-                      Get.to(() => BusinessDetailForm());
+                      await Get.to(() => BusinessDetailForm());
                     },
                     child: SizedBox(
                       height: 100,
@@ -150,6 +164,12 @@ class Home extends StatelessWidget {
       }
     }
     var currentLocation = await location.getLocation();
-    print(currentLocation);
+    var latitude = currentLocation.latitude.toString();
+    var longitude = currentLocation.longitude.toString();
+    await Database().updateLocation(latitude, longitude);
+    print(latitude);
+    print(longitude);
+
+    print(currentLocation.toString());
   }
 }
