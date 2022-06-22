@@ -1,6 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:akbarimandiwholesale/Controllers/Auth/AuthController.dart';
+import 'package:akbarimandiwholesale/Models/BusinessInfoModel.dart';
+import 'package:akbarimandiwholesale/Models/UserModel.dart';
+import 'package:akbarimandiwholesale/Services/DataServices.dart';
 import 'package:akbarimandiwholesale/views/Otp.dart';
 import 'package:akbarimandiwholesale/views/OtpVerification.dart';
 // import 'package:akbarimandiwholesale/views/OtpVerification.dart';
@@ -19,7 +22,15 @@ class PhoneVerification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('موبائل نمبر کی تصدیق کریں'),
+        title: Center(child: Text('موبائل نمبر کی تصدیق کریں')),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await loginController.signOut();
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ],
       ),
       body: loginController.isLoading(false)
           ? const Center(child: CircularProgressIndicator())
@@ -81,6 +92,7 @@ class PhoneVerification extends StatelessWidget {
                                   var _phone = _countryDialCode + phone.text;
                                   await loginController.verifyPhone(_phone);
                                   Get.to(OtpVerification());
+                                  // await Database().addPhoneNumber(_phone);
                                 },
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(

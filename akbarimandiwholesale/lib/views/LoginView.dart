@@ -194,14 +194,24 @@ class Login extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SocialIconLogin(
-                          image: 'assets/images/googleicon.svg',
+                        InkWell(
+                          onTap: () {
+                            authController.googleLogin();
+                          },
+                          child: SocialIconLogin(
+                            image: 'assets/images/googleicon.svg',
+                          ),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
-                        SocialIconLogin(
-                          image: 'assets/images/facebookicon.svg',
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => PhoneVerification());
+                          },
+                          child: SocialIconLogin(
+                            image: 'assets/images/phoneicon.svg',
+                          ),
                         ),
                       ],
                     ),

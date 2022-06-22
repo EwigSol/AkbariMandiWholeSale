@@ -7,13 +7,21 @@ import 'package:get/get.dart';
 import 'Otp.dart';
 
 class OtpVerification extends StatelessWidget {
-  final phone = TextEditingController();
+  final otp = TextEditingController();
   final AuthController loginController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('او ٹی پی نمبر کی تصدیق کریں'),
+        title: Center(child: Text('او ٹی پی نمبر کی تصدیق کریں')),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await loginController.signOut();
+            },
+            icon: Icon(Icons.exit_to_app),
+          ),
+        ],
       ),
       body: loginController.isLoading(false)
           ? const Center(child: CircularProgressIndicator())
@@ -30,7 +38,7 @@ class OtpVerification extends StatelessWidget {
                               horizontal: 10.0,
                             ),
                             child: TextFormField(
-                              controller: phone,
+                              controller: otp,
                               keyboardType: TextInputType.phone,
                               decoration: const InputDecoration(
                                 labelText: 'او ٹی پی نمبر',
@@ -47,7 +55,7 @@ class OtpVerification extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  await loginController.otpVerify(phone.text);
+                                  await loginController.otpVerify(otp.text);
                                   // Get.to(OtpScreen());
                                 },
                                 child: Container(

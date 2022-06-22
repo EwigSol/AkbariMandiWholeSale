@@ -5,11 +5,12 @@ import 'package:akbarimandiwholesale/Models/UserModel.dart';
 import 'package:akbarimandiwholesale/Services/DataServices.dart';
 import 'package:akbarimandiwholesale/utils/GlobalVariables.dart';
 import 'package:akbarimandiwholesale/views/Home.dart';
-import 'package:akbarimandiwholesale/views/OtpVerification.dart';
+import 'package:akbarimandiwholesale/views/LoginView.dart';
 import 'package:akbarimandiwholesale/views/PhoneVerification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   var isLoading = false.obs;
@@ -17,6 +18,10 @@ class AuthController extends GetxController {
   var authStatus = ''.obs;
 
   var auth = FirebaseAuth.instance;
+
+  Rxn<User> firebaseUser = Rxn<User>();
+
+  User? get userGetter => firebaseUser.value;
 
   verifyPhone(String phone) async {
     isLoading.value = true;
@@ -28,6 +33,7 @@ class AuthController extends GetxController {
           await auth.signInWithCredential(authCredential);
         },
         verificationFailed: (authException) {
+          print(authException.toString());
           if (authException.code == 'invalid-phone-number') {
             Get.snackbar("sms code info", "otp code hasn't been sent!!",
                 snackPosition: SnackPosition.BOTTOM);
@@ -37,6 +43,9 @@ class AuthController extends GetxController {
           isLoading.value = false;
           verId = verificationId;
           authStatus.value = "login successfully";
+          UserModel _userModel = UserModel(
+            phone: phone,
+          );
         },
         codeAutoRetrievalTimeout: (String id) {
           verId = id;
@@ -44,15 +53,16 @@ class AuthController extends GetxController {
   }
 
   otpVerify(String otp) async {
+    print(otp);
     isLoading.value = true;
     try {
       UserCredential userCredential = await auth.signInWithCredential(
           PhoneAuthProvider.credential(verificationId: verId, smsCode: otp));
-      if (userCredential.user != null) {
-        isLoading.value = false;
-        Get.to(Home());
-      }
+      isLoading.value = false;
+
+      Get.to(() => Home());
     } on Exception catch (e) {
+      print(e.toString());
       Get.snackbar("otp info", "otp code is not correct !!",
           snackPosition: SnackPosition.BOTTOM);
     }
@@ -101,6 +111,65 @@ class AuthController extends GetxController {
       debugPrint(e.toString());
       Get.snackbar("Error in Signing In", e.toString(),
           snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+    }
+  }
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'profile',
+    ],
+  );
+
+  Future<void> googleLogin() async {
+    try {
+      var googleUser = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+      UserCredential authResult =
+          await auth.signInWithCredential(authCredential);
+      UserModel _userModel = UserModel(
+        id: authResult.user!.uid,
+        name: authResult.user!.displayName,
+        email: authResult.user!.email,
+      );
+      await Database().createUser(_userModel);
+
+      isSigned.value = true;
+      userID.value = authResult.user!.uid;
+      Get.put(UserController()).onInit();
+
+      Get.offAll(
+        () => PhoneVerification(),
+      );
+      Get.snackbar(
+        "SignedIn",
+        "Signedin Successfully",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } catch (error) {
+      print(error);
+      Get.snackbar(
+        'Failed',
+        error.toString(),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      final googleSignin = GoogleSignIn();
+      await googleSignin.signOut();
+      await auth.signOut();
+
+      isSigned.value = false;
+      userID.value = '';
+      await Get.offAll(() => Login());
+    } catch (e) {
+      Get.snackbar("Error in Signing Out", e.toString(),
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 }

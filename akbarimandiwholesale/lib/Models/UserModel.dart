@@ -7,18 +7,15 @@ class UserModel {
   String? name;
   String? email;
   String? pass;
+  String? phone;
 
-  UserModel({
-    this.id,
-    this.name,
-    this.email,
-    this.pass,
-  });
+  UserModel({this.id, this.name, this.email, this.pass, this.phone});
 
   UserModel.fromFirestore(DocumentSnapshot doc) {
     id = doc['id'];
     name = doc['name'];
     email = doc['email'];
     pass = doc['passKey'];
+    phone = doc['phone'];
   }
 }
