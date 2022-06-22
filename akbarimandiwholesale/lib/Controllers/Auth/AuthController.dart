@@ -23,6 +23,8 @@ class AuthController extends GetxController {
 
   User? get userGetter => firebaseUser.value;
 
+  var _phone = ''.obs;
+
   verifyPhone(String phone) async {
     isLoading.value = true;
     await auth.verifyPhoneNumber(
@@ -42,10 +44,7 @@ class AuthController extends GetxController {
         codeSent: (String verificationId, int? resendToken) async {
           isLoading.value = false;
           verId = verificationId;
-          authStatus.value = "login successfully";
-          UserModel _userModel = UserModel(
-            phone: phone,
-          );
+          _phone.value = phone;
         },
         codeAutoRetrievalTimeout: (String id) {
           verId = id;
@@ -59,7 +58,13 @@ class AuthController extends GetxController {
       UserCredential userCredential = await auth.signInWithCredential(
           PhoneAuthProvider.credential(verificationId: verId, smsCode: otp));
       isLoading.value = false;
-
+      authStatus.value = "login successfully";
+      UserModel _userModel = UserModel(
+        id: userCredential.user!.uid,
+        phone: _phone.toString(),
+      );
+      userID.value = userCredential.user!.uid;
+      await Database().createUser(_userModel);
       Get.to(() => Home());
     } on Exception catch (e) {
       print(e.toString());
@@ -81,7 +86,7 @@ class AuthController extends GetxController {
         pass: password,
       );
       await Database().createUser(_userModel);
-      Get.to(() => PhoneVerification());
+      Get.to(() => Home());
       Get.snackbar('Welcome', 'Account Created Successfuly',
           snackPosition: SnackPosition.BOTTOM);
     } catch (e) {
@@ -100,7 +105,7 @@ class AuthController extends GetxController {
       Get.put(UserController()).onInit();
 
       Get.offAll(
-        () => PhoneVerification(),
+        () => Home(),
       );
       Get.snackbar(
         "SignedIn",

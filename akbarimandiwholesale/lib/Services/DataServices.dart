@@ -17,19 +17,19 @@ class Database {
           .doc('userDetials')
           .set({
         "id": userModel.id,
-        // "name": userModel.name,
+        "name": userModel.name,
         "email": userModel.email,
         "passKey": userModel.pass,
-        // "phone": userModel.phone,
-        // "businessName": userModel.businessName,
-        // "businessPhone": userModel.businessPhone,
-        // "reffererName": userModel.reffererName,
-        // "reffererPhone": userModel.businessPhone,
-        // "frontImageUrl": userModel.frontImageUrl,
-        // "insideImageUrl": userModel.insideImageUrl,
-        // "insideImageUrlTwo": userModel.insideImageUrlTwo,
-        // "longitude": userModel.longitude,
-        // "latitude": userModel.latitude,
+        "phone": userModel.phone,
+        "businessName": userModel.businessName,
+        "businessPhone": userModel.businessPhone,
+        "reffererName": userModel.reffererName,
+        "reffererPhone": userModel.businessPhone,
+        "frontImageUrl": userModel.frontImageUrl,
+        "insideImageUrl": userModel.insideImageUrl,
+        "insideImageUrlTwo": userModel.insideImageUrlTwo,
+        "longitude": userModel.longitude,
+        "latitude": userModel.latitude,
       });
       return true;
     } catch (e) {

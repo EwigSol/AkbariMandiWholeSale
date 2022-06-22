@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 10,
             ),
             const Text(
-              'اکبری مندی ہول سیل',
+              'اکبری منڈی ہول سیل',
               style: TextStyle(
                   color: Colors.green,
                   fontSize: 35,

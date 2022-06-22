@@ -19,6 +19,7 @@ class BusinessDetailForm extends StatelessWidget {
   final TextEditingController refrerNameController = TextEditingController();
   final TextEditingController refrerPhoneController = TextEditingController();
   final userController = Get.put(UserController());
+  // final userController = Get.find<UserController>();
   final authController = Get.put(AuthController());
   final obsecure = false;
 
@@ -65,7 +66,7 @@ class BusinessDetailForm extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Text(
+                          const Text(
                             'دوکان کے فرنٹ کی تصویر اپلوڈ کریں',
                             style: TextStyle(color: Colors.green, fontSize: 18),
                           ),
@@ -86,50 +87,57 @@ class BusinessDetailForm extends StatelessWidget {
                                             BorderRadius.circular(60)),
                                     padding: EdgeInsets.all(2),
                                     child: Obx(
-                                      () => ClipRRect(
-                                        borderRadius: BorderRadius.circular(60),
-                                        child: isUploading.value
-                                            ? const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              )
-                                            : Image.network(
-                                                userController
-                                                    .userGetter!.frontImageUrl!,
-                                                fit: BoxFit.cover,
-                                                loadingBuilder:
-                                                    (BuildContext context,
-                                                        Widget child,
-                                                        ImageChunkEvent?
-                                                            loadingProgress) {
-                                                  if (loadingProgress == null) {
-                                                    return child;
-                                                  }
-                                                  return Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      value: loadingProgress
-                                                                  .expectedTotalBytes !=
-                                                              null
-                                                          ? loadingProgress
-                                                                  .cumulativeBytesLoaded /
-                                                              loadingProgress
-                                                                  .expectedTotalBytes!
-                                                          : null,
+                                      () => userController.userGetter != null
+                                          ? ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(60),
+                                              child: isUploading.value
+                                                  ? const Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    )
+                                                  : Image.network(
+                                                      '${Get.find<UserController>().userGetter!.frontImageUrl}',
+                                                      fit: BoxFit.cover,
+                                                      loadingBuilder: (BuildContext
+                                                              context,
+                                                          Widget child,
+                                                          ImageChunkEvent?
+                                                              loadingProgress) {
+                                                        if (loadingProgress ==
+                                                            null) {
+                                                          return child;
+                                                        }
+                                                        return Center(
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            value: loadingProgress
+                                                                        .expectedTotalBytes !=
+                                                                    null
+                                                                ? loadingProgress
+                                                                        .cumulativeBytesLoaded /
+                                                                    loadingProgress
+                                                                        .expectedTotalBytes!
+                                                                : null,
+                                                          ),
+                                                        );
+                                                      },
+                                                      errorBuilder:
+                                                          (BuildContext context,
+                                                              Object exception,
+                                                              StackTrace?
+                                                                  stackTrace) {
+                                                        return SvgPicture.asset(
+                                                          'assets/images/shopicon.svg',
+                                                          width: 25,
+                                                        );
+                                                      },
                                                     ),
-                                                  );
-                                                },
-                                                errorBuilder: (BuildContext
-                                                        context,
-                                                    Object exception,
-                                                    StackTrace? stackTrace) {
-                                                  return SvgPicture.asset(
-                                                    'assets/images/facebookicon.svg',
-                                                    width: 122,
-                                                  );
-                                                },
-                                              ),
-                                      ),
+                                            )
+                                          : SvgPicture.asset(
+                                              'assets/images/shpoicon.svg',
+                                              width: 25,
+                                            ),
                                     ),
                                   ),
                                 ),
@@ -201,58 +209,60 @@ class BusinessDetailForm extends StatelessWidget {
                                                     BorderRadius.circular(60)),
                                             padding: EdgeInsets.all(2),
                                             child: Obx(
-                                              () => ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(60),
-                                                child: isUploading.value
-                                                    ? const Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      )
-                                                    : Image.network(
-                                                        userController
-                                                            .userGetter!
-                                                            .insideImageUrl!,
-                                                        fit: BoxFit.cover,
-                                                        loadingBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                Widget child,
-                                                                ImageChunkEvent?
-                                                                    loadingProgress) {
-                                                          if (loadingProgress ==
-                                                              null) {
-                                                            return child;
-                                                          }
-                                                          return Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              value: loadingProgress
-                                                                          .expectedTotalBytes !=
-                                                                      null
-                                                                  ? loadingProgress
-                                                                          .cumulativeBytesLoaded /
-                                                                      loadingProgress
-                                                                          .expectedTotalBytes!
-                                                                  : null,
+                                              () => userController.userGetter !=
+                                                      null
+                                                  ? ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              60),
+                                                      child: isUploading.value
+                                                          ? const Center(
+                                                              child:
+                                                                  CircularProgressIndicator(),
+                                                            )
+                                                          : Image.network(
+                                                              '${Get.find<UserController>().userGetter!.insideImageUrl}',
+                                                              fit: BoxFit.cover,
+                                                              loadingBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      Widget
+                                                                          child,
+                                                                      ImageChunkEvent?
+                                                                          loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                }
+                                                                return Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    value: loadingProgress.expectedTotalBytes !=
+                                                                            null
+                                                                        ? loadingProgress.cumulativeBytesLoaded /
+                                                                            loadingProgress.expectedTotalBytes!
+                                                                        : null,
+                                                                  ),
+                                                                );
+                                                              },
+                                                              errorBuilder: (BuildContext
+                                                                      context,
+                                                                  Object
+                                                                      exception,
+                                                                  StackTrace?
+                                                                      stackTrace) {
+                                                                return SvgPicture
+                                                                    .asset(
+                                                                  'assets/images/shopicon.svg',
+                                                                  width: 25,
+                                                                );
+                                                              },
                                                             ),
-                                                          );
-                                                        },
-                                                        errorBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                Object
-                                                                    exception,
-                                                                StackTrace?
-                                                                    stackTrace) {
-                                                          return SvgPicture
-                                                              .asset(
-                                                            'assets/images/facebookicon.svg',
-                                                            width: 122,
-                                                          );
-                                                        },
-                                                      ),
-                                              ),
+                                                    )
+                                                  : SvgPicture.asset(
+                                                      'assets/images/shpoicon.svg',
+                                                      width: 25,
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -324,60 +334,62 @@ class BusinessDetailForm extends StatelessWidget {
                                                             60)),
                                                 padding: EdgeInsets.all(2),
                                                 child: Obx(
-                                                  () => ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            60),
-                                                    child: isUploading.value
-                                                        ? const Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          )
-                                                        : Image.network(
-                                                            userController
-                                                                .userGetter!
-                                                                .insideImageUrlTwo!,
-                                                            fit: BoxFit.cover,
-                                                            loadingBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    Widget
-                                                                        child,
-                                                                    ImageChunkEvent?
-                                                                        loadingProgress) {
-                                                              if (loadingProgress ==
-                                                                  null) {
-                                                                return child;
-                                                              }
-                                                              return Center(
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                                  value: loadingProgress
-                                                                              .expectedTotalBytes !=
-                                                                          null
-                                                                      ? loadingProgress
-                                                                              .cumulativeBytesLoaded /
-                                                                          loadingProgress
-                                                                              .expectedTotalBytes!
-                                                                      : null,
+                                                  () => userController
+                                                              .userGetter !=
+                                                          null
+                                                      ? ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(60),
+                                                          child: isUploading
+                                                                  .value
+                                                              ? const Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                )
+                                                              : Image.network(
+                                                                  '${Get.find<UserController>().userGetter!.insideImageUrlTwo}',
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                  loadingBuilder: (BuildContext
+                                                                          context,
+                                                                      Widget
+                                                                          child,
+                                                                      ImageChunkEvent?
+                                                                          loadingProgress) {
+                                                                    if (loadingProgress ==
+                                                                        null) {
+                                                                      return child;
+                                                                    }
+                                                                    return Center(
+                                                                      child:
+                                                                          CircularProgressIndicator(
+                                                                        value: loadingProgress.expectedTotalBytes !=
+                                                                                null
+                                                                            ? loadingProgress.cumulativeBytesLoaded /
+                                                                                loadingProgress.expectedTotalBytes!
+                                                                            : null,
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                  errorBuilder: (BuildContext
+                                                                          context,
+                                                                      Object
+                                                                          exception,
+                                                                      StackTrace?
+                                                                          stackTrace) {
+                                                                    return SvgPicture
+                                                                        .asset(
+                                                                      'assets/images/shopicon.svg',
+                                                                      width: 25,
+                                                                    );
+                                                                  },
                                                                 ),
-                                                              );
-                                                            },
-                                                            errorBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    Object
-                                                                        exception,
-                                                                    StackTrace?
-                                                                        stackTrace) {
-                                                              return SvgPicture
-                                                                  .asset(
-                                                                'assets/images/facebookicon.svg',
-                                                                width: 122,
-                                                              );
-                                                            },
-                                                          ),
-                                                  ),
+                                                        )
+                                                      : SvgPicture.asset(
+                                                          'assets/images/shpoicon.svg',
+                                                          width: 25,
+                                                        ),
                                                 ),
                                               ),
                                             ),

@@ -34,7 +34,7 @@ class Login extends StatelessWidget {
                 height: height * 0.04,
               ),
               const Text(
-                'اکبری مندی ہول سیل',
+                'اکبری منڈی ہول سیل',
                 style: TextStyle(
                     color: Colors.green,
                     fontSize: 52,
@@ -116,7 +116,7 @@ class Login extends StatelessWidget {
                           onPressed: () async {
                             await authController.logIn(
                                 emailController.text, passwordController.text);
-                            Get.offAll(() => PhoneVerification());
+                            // Get.offAll(() => PhoneVerification());
                             //   isLoading.value = true;
                             //   if (GetUtils.isEmail(emailController.text)) {
                             //     await authController.logIn(

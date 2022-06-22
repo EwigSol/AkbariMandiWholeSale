@@ -33,7 +33,7 @@ class SignUp extends StatelessWidget {
                   height: 40,
                 ),
                 const Text(
-                  'اکبری مندی ہول سیل',
+                  'اکبری منڈی ہول سیل',
                   style: TextStyle(
                       color: Colors.green,
                       fontSize: 52.0,
