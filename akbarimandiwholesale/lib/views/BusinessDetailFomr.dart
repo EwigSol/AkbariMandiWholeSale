@@ -31,7 +31,7 @@ class BusinessDetailForm extends StatelessWidget {
     final imgPicker = ImagePicker();
     try {
       PickedFile? pickedFile = await imgPicker.getImage(
-          source: ImageSource.gallery, imageQuality: 20);
+          source: ImageSource.camera, imageQuality: 20);
       image = File(pickedFile!.path);
       imageIsNull.value = false;
     } catch (e) {
